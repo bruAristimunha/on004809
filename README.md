@@ -26,3 +26,9 @@ Rows were matched to header channels BY NAME, never by position (exact; then cas
 120 channels.tsv rows had no channel in the data file (11 files) and were removed; they are kept verbatim under `sourcedata/channels-removed-2026-10-18/` (same relative path). Examples: `sub-R1354E_ses-0_task-catFR1_acq-bipolar_ieeg.edf`: 5Ldm1-5Ldm2, 5Ldm2-5Ldm3, 5Ldm3-5Ldm4, 5Ldm4-5Ldm5, 5Ldm5-5Ldm6; `sub-R1354E_ses-1_task-catFR1_acq-bipolar_ieeg.edf`: 5Ldm1-5Ldm2, 5Ldm2-5Ldm3, 5Ldm3-5Ldm4, 5Ldm4-5Ldm5, 5Ldm5-5Ldm6; `sub-R1354E_ses-2_task-catFR1_acq-bipolar_ieeg.edf`: 5Ldm1-5Ldm2, 5Ldm2-5Ldm3, 5Ldm3-5Ldm4, 5Ldm4-5Ldm5, 5Ldm5-5Ldm6.
 
 Applied by position, the former rows would have given wrong labels to 385 channels in 7 files (rows missing, extra or out of order before that position).
+
+## Electrode locations (19 Oct 2026)
+
+Sub-R1004D ses-0: MNI pair (outside the head) replaced by a space-Talairach pair (proposal A3, Lane G round 4). Evidence: sub-R1004D ses-0 MNI x/y/z were outside any head (x -166..-114, y 61..208); the same rows' tal.x/y/z are in range and the deposit's *_electrodes.json defines them as "position in Talairach coordinates". New space-Talairach electrodes.tsv (x/y/z = tal.*) and coordsystem.json (the same content as the deposit's other space-Talairach coordsystem files, e.g. sub-R1016M); the MNI electrodes.tsv/coordsystem.json pair is removed so that readers choose the Talairach pair (EEGDash reads a named space before Other, then alphabetically, so MNI would otherwise win).
+
+Full evidence per dataset: REPORT-ieeg-locations.md and ieeg_locations.json (Lane G, 19 Oct 2026). This dataset mirrors OpenNeuro; the same change belongs upstream. Local branch only.
